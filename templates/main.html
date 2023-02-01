@@ -7,12 +7,21 @@
     <title>Document</title>
 </head>
 <body>
-
-    <ul style="text-align: center;">
-    {% for i in range(coin|length) %}
-        <li>{{ i + 1 }}: {{ coin[i].id }} {{ coin[i].current_price }}</li>
-    {% endfor %}
-    </ul>
-
+    <div style="text-align: center;">
+        <table style="margin: 0 auto;">
+            <tr>
+                <th>ID</th>
+                <th>Coin</th>
+                <th>Price</th>
+            </tr>
+        {% for i in range(coin|length) %}
+            <tr>
+                <td>{{ i + 1 }}</td>
+                <td>{{ coin[i].name }}</td>
+                <td>${{ coin[i].current_price }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
 </body>
 </html>
