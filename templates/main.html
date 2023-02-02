@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}Main{% endblock %}
+
+{% block content %}
     <div style="text-align: center;">
         <table style="margin: 0 auto;">
             <tr>
@@ -17,11 +13,10 @@
         {% for i in range(coin|length) %}
             <tr>
                 <td>{{ i + 1 }}</td>
-                <td>{{ coin[i].name }}</td>
+                <td><a href="/coin/{{ coin[i].id }}")>{{ coin[i].name }}</a></td>
                 <td>${{ coin[i].current_price }}</td>
             </tr>
         {% endfor %}
         </table>
     </div>
-</body>
-</html>
+{% endblock %}
