@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+Coin information
+{% endblock %}
+
+{% block content %}
+
+<div>
+    {% for i in range(price.prices | length) %}
+        <div>
+            {{ price.prices[i][0] | ctime }} {{ price.prices[i][1] }}
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
