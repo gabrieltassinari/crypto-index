@@ -5,13 +5,11 @@ Coin information
 {% endblock %}
 
 {% block content %}
+ 
+<p>Chart</p>
 
-<div>
-    {% for i in range(price.prices | length) %}
-        <div>
-            {{ price.prices[i][0] | ctime }} {{ price.prices[i][1] }}
-        </div>
-    {% endfor %}
-</div>
+<img src="{{url_for('static', filename='new_plot.png')}}" alt="Chart">
 
+<div>{{ coin_price }}</div>
+<div>{{ coin_date }}</div>
 {% endblock %}

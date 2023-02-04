@@ -1,6 +1,7 @@
 from flask import Flask, render_template
-from datetime import datetime
 import requests
+
+import matplotlib.pyplot as plt
 
 app = Flask(__name__)
 
@@ -13,21 +14,27 @@ def get_coin():
 
 @app.route('/coin/<crypto>')
 def info_coin(crypto):
-
-    now = int(datetime.now().timestamp())
-
+    
     coin = requests.get(
-    f'https://api.coingecko.com/api/v3/coins/{crypto}').json()
+        f'https://api.coingecko.com/api/v3/coins/{crypto}/market_chart?vs_currency=usd&days=30&interval=daily').json()
+    
+    coin_date = []
+    coin_price = []
 
-    price = requests.get(
-        f'https://api.coingecko.com/api/v3/coins/{crypto}/market_chart/range?vs_currency=usd&from={now - 604800}&to={now}').json()
+    for i in range(len(coin['prices'])):
+        coin_date.append(coin['prices'][i][0])
+        coin_price.append(coin['prices'][i][1])
 
-    return render_template('coin.html', coin=coin, price=price)
+    x = coin_date
+    y = coin_price
+    plt.plot(x, y)
 
-@app.template_filter('ctime')
-def convert_time(t):
-    return datetime.fromtimestamp(t / 1000)
+    plt.ylabel('price')
+    plt.xlabel('time')
 
+    plt.savefig('static/new_plot.png')
+
+    return render_template('coin.html', coin_date=coin_date, coin_price=coin_price)
 
 if __name__ == "__main__":
     app.run()
