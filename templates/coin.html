@@ -6,9 +6,9 @@ Coin information
 
 {% block content %}
  
-<p>Chart</p>
+<h1 style="text-align: center;">{{ crypto }} chart</h1>
 
-<img src="{{url_for('static', filename='new_plot.png')}}" alt="Chart">
+<img src="{{url_for('static', filename='new_plot.png')}}" alt="Chart", class="center">
 
 <div>{{ coin_price }}</div>
 <div>{{ coin_date }}</div>
